@@ -180,8 +180,5 @@ Nerd Font compatible terminal
 
 ---
 
-## 📄 License
-MIT
-
 ## ❤️ Contributions
 Pull requests and suggestions are always welcome!
