@@ -1,0 +1,25 @@
+# Neovim data (plugins, cache, compiled files)
+nvim-data/
+nvim-data/*
+
+# Lazy.nvim plugin directory
+lazy/
+lazy/*
+
+# Swap files
+*.swp
+*.swo
+
+# Backup files
+*.bak
+*.tmp
+
+# Session files
+Session.vim
+
+# Undo history
+undo/
+
+# Logs
+*.log
+
