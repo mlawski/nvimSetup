@@ -45,8 +45,10 @@ This repository contains:
 - **Treesitter for syntax + indent**
 - **conform.nvim for formatting**
 - **gitsigns**
+- **vim-fugitive + diffview**
 - **lualine**
 - **catppuccin theme**
+- **Markdown support**
 - Works on:
   - Windows 11
   - Linux (Ubuntu, Fedora, Arch, etc.)
@@ -115,7 +117,6 @@ nvim
 
 - **Neovim** 0.9+ (0.10+ recommended)
 - **Git**
-- **ripgrep**, **fd**, **fzf** (Installed automatically by the scripts)
 
 ---
 
@@ -136,6 +137,16 @@ nvim
 | Prev Diagnostic | `[d` |
 | Next Diagnostic | `]d` |
 | Trigger Autocomplete | `<C-Space>` |
+| Git Status | `<leader>gs` |
+| Git commit | `<leader>gc` |
+| Git push | `<leader>gp` |
+| Git blame | `<leader>gb` |
+| Diff current file | `<leader>gd` |
+| Open diffview | `<leader>dv` |
+| Closs diffview | `<leader>dc` |
+| File history | `<leader>dh` |
+| MarkdownPrevStart | `<leader>mp` |
+| MarkdownPrevStop | `<leader>ms` |
 
 ---
 

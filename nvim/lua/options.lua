@@ -13,9 +13,9 @@ opt.signcolumn = "yes"
 
 opt.list = true
 opt.listchars = {
-  tab = "→ ",
-  space = "·",
-  trail = "•",
+    tab = "→ ",
+    space = "·",
+    trail = "•",
 }
 
 opt.clipboard = "unnamedplus"
