@@ -92,6 +92,21 @@ return {
             })
         end,
     },
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        config = function ()
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    "stylua",
+                    "clang-format",
+                    "black",
+                    "prettier",
+                },
+                auto_update = false,
+                run_on_start = true,
+            })
+        end,
+    },
 
     -- nvim-cmp
     {
@@ -147,6 +162,12 @@ return {
                     c = { "clang-format" },
                     python = { "black" },
                     markdown = { "prettier" },
+                    json = { "prettier" },
+                    yaml = { "prettier" },
+                    html = { "prettier" },
+                    css = { "prettier" },
+                    javascript = { "prettier" },
+                    typescript = { "prettier" },
                 },
             })
         end,
