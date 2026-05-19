@@ -10,9 +10,24 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        lazy = false,
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("catppuccin")
+            local ok, catppuccin = pcall(require, "catppuccin")
+            if not ok then
+                vim.notify("Catppuccin not installed. Ruun :Lazy sync", vim.log.levels.WARN)
+                return
+            end
+
+            catppuccin.setup({
+                flavour = "mocha", -- latte, frappe, macchiato, mocha
+                transparent_background = false,
+            })
+
+            local ok_colorscheme = pcall(vim.cmd.colorscheme, "catppuccin")
+            if not ok_colorscheme then
+                vim.notify("Failed to load catppuccin colorscheme", vim.log.levels.ERROR)
+            end
         end,
     },
 
@@ -144,9 +159,12 @@ return {
     -- lualine
     {
         "nvim-lualine/lualine.nvim",
+        dependencies = { "catppuccin" },
         config = function()
             require("lualine").setup({
-                options = { theme = "catppuccin" },
+                options = { 
+                    theme = "auto",
+                },
             })
         end,
     },
