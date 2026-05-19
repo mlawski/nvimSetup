@@ -1,9 +1,8 @@
-local lspconfig = require("lspconfig")
 -- Capabilities for nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Lua
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -13,11 +12,14 @@ lspconfig.lua_ls.setup({
 })
 
 -- C/C++
-lspconfig.clangd.setup({
+vim.lsp.config('clangd', {
     capabilities = capabilities,
 })
 
 -- Python
-lspconfig.pyright.setup({
+vim.lsp.config('pyright', {
     capabilities = capabilities,
 })
+
+-- Enable the configured LSP servers
+vim.lsp.enable({'lsp_lua', 'clangd', 'pyright'})
