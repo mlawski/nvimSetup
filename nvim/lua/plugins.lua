@@ -19,10 +19,10 @@ return {
                 return
             end
 
-            catppuccin.setup({
+            catppuccin.setup {
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
                 transparent_background = false,
-            })
+            }
 
             local ok_colorscheme = pcall(vim.cmd.colorscheme, "catppuccin")
             if not ok_colorscheme then
@@ -41,10 +41,14 @@ return {
             "MunifTanjim/nui.nvim",
         },
         config = function()
-            require("neo-tree").setup({
+            require("neo-tree").setup {
                 window = { position = "right", width = 32 },
-                filesystem = { follow_current_file = true },
-            })
+                filesystem = {
+                    follow_current_file = {
+                        enabled = true,
+                    },
+                },
+            }
         end,
     },
 
@@ -76,7 +80,7 @@ return {
                 return
             end
 
-            configs.setup({
+            configs.setup {
                 ensure_installed = {
                     "lua",
                     "vim",
@@ -86,7 +90,7 @@ return {
                 },
                 highlight = { enable = true },
                 indent = { enable = true },
-            })
+            }
         end,
     },
 
@@ -97,20 +101,22 @@ return {
     -- LSP
     {
         "williamboman/mason.nvim",
-        config = function() require("mason").setup() end,
+        config = function()
+            require("mason").setup()
+        end,
     },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require("mason-lspconfig").setup({
+            require("mason-lspconfig").setup {
                 ensure_installed = { "lua_ls", "clangd", "pyright" },
-            })
+            }
         end,
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        config = function ()
-            require("mason-tool-installer").setup({
+        config = function()
+            require("mason-tool-installer").setup {
                 ensure_installed = {
                     "stylua",
                     "clang-format",
@@ -119,7 +125,7 @@ return {
                 },
                 auto_update = false,
                 run_on_start = true,
-            })
+            }
         end,
     },
 
@@ -131,20 +137,20 @@ return {
             "L3MON4D3/LuaSnip",
         },
         config = function()
-            local cmp = require("cmp")
-            cmp.setup({
+            local cmp = require "cmp"
+            cmp.setup {
                 snippet = {
                     expand = function(args)
                         require("luasnip").lsp_expand(args.body)
                     end,
                 },
-                mapping = cmp.mapping.preset.insert({
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                }),
+                mapping = cmp.mapping.preset.insert {
+                    ["<CR>"] = cmp.mapping.confirm { select = true },
+                },
                 sources = {
                     { name = "nvim_lsp" },
                 },
-            })
+            }
         end,
     },
 
@@ -161,11 +167,11 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = { "catppuccin" },
         config = function()
-            require("lualine").setup({
-                options = { 
+            require("lualine").setup {
+                options = {
                     theme = "auto",
                 },
-            })
+            }
         end,
     },
 
@@ -173,7 +179,7 @@ return {
     {
         "stevearc/conform.nvim",
         config = function()
-            require("conform").setup({
+            require("conform").setup {
                 formatters_by_ft = {
                     lua = { "stylua" },
                     cpp = { "clang-format" },
@@ -187,7 +193,7 @@ return {
                     javascript = { "prettier" },
                     typescript = { "prettier" },
                 },
-            })
+            }
         end,
     },
 
@@ -207,5 +213,5 @@ return {
         config = function()
             vim.g.mkdp_auto_start = 0
         end,
-    }
+    },
 }

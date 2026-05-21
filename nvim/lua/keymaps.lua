@@ -1,9 +1,10 @@
 local map = vim.keymap.set
 
 -- fzf-lua
-map("n", "<leader>ff", function() require("fzf-lua").files() end)
-map("n", "<leader>fg", function() require("fzf-lua").live_grep() end)
-map("n", "<leader>fb", function() require("fzf-lua").buffers() end)
+local fzf = require "fzf-lua"
+map("n", "<leader>ff", fzf.files)
+map("n", "<leader>fg", fzf.live_grep)
+map("n", "<leader>fb", fzf.buffers)
 
 -- neo-tree
 map("n", "<leader>e", ":Neotree toggle<CR>")
@@ -22,7 +23,10 @@ map("n", "<leader>ca", vim.lsp.buf.code_action)
 map("n", "<leader>d", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
 map("n", "]d", vim.diagnostic.goto_next)
-map("n", "<leader>f", function() vim.lsp.buf.format() end)
+
+map("n", "<leader>f", function()
+    require("conform").format { async = true, lsp_fallback = true }
+end)
 
 -- Fugitive
 vim.keymap.set("n", "<leader>gs", ":G<CR>", { desc = "Git status" })

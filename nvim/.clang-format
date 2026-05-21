@@ -1,0 +1,43 @@
+BasedOnStyle: LLVM
+
+# --- Indentation ---
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# --- Line width ---
+ColumnLimit: 120
+
+# --- Braces (UE look, LLVM discipline) ---
+BreakBeforeBraces: Allman
+
+# --- Short statements ---
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# --- Includes ---
+SortIncludes: true
+IncludeBlocks: Regroup
+
+# --- Pointers & references (UE style) ---
+PointerAlignment: Left
+ReferenceAlignment: Left
+DerivePointerAlignment: false
+
+# --- Spaces ---
+SpaceBeforeParens: ControlStatements
+SpaceAfterCStyleCast: true
+
+# --- Alignment (LLVM-like minimalism) ---
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignTrailingComments: false
+AlignOperands: true
+
+# --- Constructors ---
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerIndentWidth: 4
+
+# --- Namespaces ---
+NamespaceIndentation: None

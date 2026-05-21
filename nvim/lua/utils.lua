@@ -14,13 +14,15 @@ end
 -- Quick key mapping
 function M.map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
-    if opts then options = vim.tbl_extend("force", options, opts) end
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- System check
 function M.is_windows()
-    return vim.loop.os_uname().version:match("Windows")
+    return vim.loop.os_uname().version:match "Windows"
 end
 
 function M.is_linux()
