@@ -48,7 +48,7 @@ return {
                         enabled = true,
                     },
                     filtered_items = {
-                        visible = true,         -- show hidden
+                        visible = true, -- show hidden
                         hide_dotfiles = false,
                         hide_gitignored = false,
                     },
@@ -139,6 +139,8 @@ return {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-buffer",
             "L3MON4D3/LuaSnip",
         },
         config = function()
