@@ -47,6 +47,11 @@ return {
                     follow_current_file = {
                         enabled = true,
                     },
+                    filtered_items = {
+                        visible = true,         -- show hidden
+                        hide_dotfiles = false,
+                        hide_gitignored = false,
+                    },
                 },
             }
         end,
