@@ -2,8 +2,12 @@
 --  LSP CONFIG (Neovim 0.11+)
 -- ============================
 
--- 1. Capabilities integration with nvim-cmp
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- 1. Capabilities integration with nvim-cmp (safe load)
+local capabilities = vim.tbl_deep_extend(
+    "force",
+    vim.lsp.protocol.make_client_capabilities(),
+    require("cmp_nvim_lsp").default_capabilities()
+)
 
 -- 2. on_attach – buffer-local keymaps
 local on_attach = function(_, bufnr)
@@ -25,7 +29,7 @@ local on_attach = function(_, bufnr)
     end, opts)
 end
 
--- 3. LSP servers
+-- 3. Server configurations
 vim.lsp.config("lua_ls", {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -46,17 +50,6 @@ vim.lsp.config("pyright", {
     on_attach = on_attach,
 })
 
-vim.lsp.config("jsonls", {
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
+-- 4. Enable servers
+vim.lsp.enable({ "lua_ls", "clangd", "pyright" })
 
-vim.lsp.config("yamlls", {
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
-vim.lsp.config("bashls", {
-    capabilities = capabilities,
-    on_attach = on_attach,
-})

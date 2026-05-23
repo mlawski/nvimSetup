@@ -15,7 +15,7 @@ return {
         config = function()
             local ok, catppuccin = pcall(require, "catppuccin")
             if not ok then
-                vim.notify("Catppuccin not installed. Ruun :Lazy sync", vim.log.levels.WARN)
+                vim.notify("Catppuccin not installed. Run :Lazy sync", vim.log.levels.WARN)
                 return
             end
 
@@ -90,6 +90,9 @@ return {
                     "lua",
                     "vim",
                     "vimdoc",
+                    "c",
+                    "cpp",
+                    "python",
                     "markdown",
                     "markdown_inline",
                 },
@@ -112,9 +115,11 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim" },
         config = function()
             require("mason-lspconfig").setup {
                 ensure_installed = { "lua_ls", "clangd", "pyright" },
+                automatic_enable = false,
             }
         end,
     },
@@ -130,33 +135,6 @@ return {
                 },
                 auto_update = false,
                 run_on_start = true,
-            }
-        end,
-    },
-
-    -- nvim-cmp
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-buffer",
-            "L3MON4D3/LuaSnip",
-        },
-        config = function()
-            local cmp = require "cmp"
-            cmp.setup {
-                snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert {
-                    ["<CR>"] = cmp.mapping.confirm { select = true },
-                },
-                sources = {
-                    { name = "nvim_lsp" },
-                },
             }
         end,
     },
