@@ -1,4 +1,4 @@
-BasedOnStyle: LLVM
+BasedOnStyle: Microsoft
 
 # --- Indentation ---
 IndentWidth: 4
@@ -8,19 +8,30 @@ UseTab: Never
 # --- Line width ---
 ColumnLimit: 120
 
-# --- Braces (UE look, LLVM discipline) ---
-BreakBeforeBraces: Allman
+# --- Braces ---
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterNamespace: false
+  AfterClass: true
+  AfterStruct: true
+  AfterFunction: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterUnion: true
+  BeforeElse: true
+  BeforeCatch: true
+  IndentBraces: false
 
 # --- Short statements ---
 AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 
 # --- Includes ---
 SortIncludes: true
 IncludeBlocks: Regroup
 
-# --- Pointers & references (UE style) ---
+# --- Pointers & references ---
 PointerAlignment: Left
 ReferenceAlignment: Left
 DerivePointerAlignment: false
@@ -29,15 +40,22 @@ DerivePointerAlignment: false
 SpaceBeforeParens: ControlStatements
 SpaceAfterCStyleCast: true
 
-# --- Alignment (LLVM-like minimalism) ---
+# --- Alignment ---
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 AlignTrailingComments: false
 AlignOperands: true
 
 # --- Constructors ---
-BreakConstructorInitializers: AfterColon
+BreakConstructorInitializers: BeforeColon
 ConstructorInitializerIndentWidth: 4
 
 # --- Namespaces ---
-NamespaceIndentation: None
+NamespaceIndentation: All
+CompactNamespaces: false
+
+# --- UE style extras ---
+AccessModifierOffset: -4
+IndentCaseLabels: true
+SeparateDefinitionBlocks: Always
+PackConstructorInitializers: Never
