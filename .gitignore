@@ -23,3 +23,5 @@ undo/
 # Logs
 *.log
 
+# package version - for now latest is expected
+nvim/lazy-lock.json

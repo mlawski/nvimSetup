@@ -1,0 +1,51 @@
+{
+  "format_on_save": "on",
+
+  "language_overrides": {
+    "C++": {
+      "formatter": {
+        "external": {
+          "command": "clang-format",
+          "arguments": ["-assume-filename", "%file"]
+        }
+      }
+    },
+
+    "C": {
+      "formatter": {
+        "external": {
+          "command": "clang-format",
+          "arguments": ["-assume-filename", "%file"]
+        }
+      }
+    },
+
+    "Lua": {
+      "formatter": {
+        "external": {
+          "command": "stylua",
+          "arguments": ["--stdin-filepath", "%file", "-"]
+        }
+      }
+    },
+
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "%file"]
+        }
+      }
+    },
+
+    "Markdown": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "%file"]
+        }
+      }
+    }
+  }
+}
+
