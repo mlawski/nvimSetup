@@ -51,9 +51,7 @@ case $DISTRO in
         sudo dnf install -y stylua || cargo install stylua
         ;;
     arch)
-        sudo pacman -Sy --noconfirm git ripgrep fd fzf neovim python python-pip clang
-        pip install black
-        sudo pacman -Sy --noconfirm stylua || cargo install stylua
+        sudo pacman -S --needed --noconfirm git ripgrep fd fzf neovim python python-pip python-black clang stylua
         ;;
 esac
 
