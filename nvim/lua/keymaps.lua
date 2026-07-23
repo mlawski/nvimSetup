@@ -5,11 +5,16 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- fzf-lua
-local fzf = require "fzf-lua"
-map("n", "<leader>ff", fzf.files, opts)
-map("n", "<leader>fg", fzf.live_grep, opts)
-map("n", "<leader>fb", fzf.buffers, opts)
+-- Telescope
+local builtin = require("telescope.builtin")
+map("n", "<leader>ff", builtin.find_files, { desc = "Telescope: Find files", silent = true })
+map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope: Live grep", silent = true })
+map("n", "<leader>fb", builtin.buffers, { desc = "Telescope: Buffers", silent = true })
+map("n", "<leader>fh", builtin.help_tags, { desc = "Telescope: Help tags", silent = true })
+map("n", "<leader>fo", builtin.oldfiles, { desc = "Telescope: Recent files", silent = true })
+map("n", "<leader>fw", builtin.grep_string, { desc = "Telescope: Grep string under cursor", silent = true })
+map("n", "<leader>fd", builtin.diagnostics, { desc = "Telescope: Workspace diagnostics", silent = true })
+-- map("n", "<leader>gB", builtin.git_branches, { desc = "Telescope: Git branches", silent = true })
 
 -- neo-tree
 map("n", "<leader>e", ":Neotree toggle<CR>", opts)
