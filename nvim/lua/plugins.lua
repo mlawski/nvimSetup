@@ -199,4 +199,27 @@ return {
             vim.g.mkdp_auto_start = 0
         end,
     },
+
+    -- C++ Assist (generate definition from declaration and vice versa)
+    {
+        "Badhi/nvim-treesitter-cpp-tools",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        ft = { "cpp", "c" },
+        config = function()
+            require("nt-cpp-tools").setup({
+                preview = {
+                    quit = "q", -- Key to exit the preview
+                    accept = "<Tab>", -- Key to accept the generated code
+                },
+                header_extension = "h",
+                source_extension = "cpp",
+                custom_define_class_function_commands = {
+                    TSCppImplWrite = {
+                        output_handle = require("nt-cpp-tools.output_handlers").get_add_to_cpp(),
+                    },
+                },
+            })
+        end,
+    },
+
 }

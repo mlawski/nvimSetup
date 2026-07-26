@@ -9,7 +9,7 @@ This repository contains:
 - symlink creation (so Neovim always loads this repo as its config)
 - installation of required CLI tools (ripgrep, fd, fzf)
 - plugin management via **lazy.nvim**
-- ready-to-use IDE setup for **C** and **Lua**
+- ready-to-use IDE setup for **C++**, **Lua**, and **Python**
 - **Mason** for easy management of LSP servers, DAP, linters, and formatters
 
 ---
@@ -19,11 +19,11 @@ This repository contains:
 - `nvim/`: The main Neovim configuration directory.
   - `init.lua`: Entry point for the Neovim configuration.
   - `lua/`: Contains modular Lua configurations.
-    - `options.lua`: Centralizes all Neovim settings
+    - `options.lua`: Centralizes all Neovim settings.
     - `keymaps.lua`: Custom keybindings.
     - `plugins.lua`: Configuration for plugin management.
     - `lsp.lua`: LSP (Language Server Protocol) setup.
-    - `utils.lua`: Helper functions (safe require, keymap wrapper, OS detection)
+    - `utils.lua`: Helper functions (safe require, keymap wrapper, OS detection).
 - `install_linux.sh`: Shell script for automated installation on Linux systems.
 - `install_windows.ps1`: PowerShell script for automated installation on Windows systems.
 
@@ -33,26 +33,29 @@ This repository contains:
 
 - **lazy.nvim** plugin manager (auto‑bootstrap)
 - **Mason** for managing LSP, DAP, linters, and formatters
-- **LSP** for:
-  - C++ (clangd)
-  - Lua (lua-language-server)
-- **Treesitter** for syntax highlighting and code structure
-- **fzf-lua** for fast file/grep navigation
+- **LSP Support** for:
+  - C / C++ (`clangd`)
+  - Lua (`lua_ls`)
+  - Python (`pyright`)
+- **C++ Development Tools**:
+  - Out-of-class definition and Rule of 3/5 generation via **nvim-treesitter-cpp-tools**
+  - Native header/source file switching via `clangd`
+- **Telescope** (with native FZF speedup) for fast file and buffer navigation
 - **nvim-cmp** for autocompletion
-- **Nerd Fonts auto-install** 
-- **Automatic LSP and formatter installation**
-- **neo-tree file explorer**
-- **Treesitter for syntax + indent**
-- **conform.nvim for formatting**
-- **gitsigns**
-- **vim-fugitive + diffview**
-- **lualine**
-- **catppuccin theme**
-- **Markdown support**
-- Works on:
+- **Nerd Fonts auto-install**
+- **Automatic LSP and formatter installation** via Mason Tool Installer
+- **neo-tree** file explorer
+- **Treesitter** for advanced syntax highlighting and code structure
+- **conform.nvim** for multi-language formatting (`clang-format`, `stylua`, `black`, `prettier`)
+- **gitsigns** for inline Git blame and hunk management
+- **vim-fugitive + diffview** for advanced Git integration
+- **lualine** statusline
+- **catppuccin** theme (Mocha flavor)
+- **Markdown support** with live preview (`markdown-preview.nvim`)
+- Works seamlessly on:
   - Windows 11
   - Linux (Ubuntu, Fedora, Arch, etc.)
-- Fully portable — clone repo, run installer, done
+- Fully portable — clone repo, run installer, done!
 
 ---
 
@@ -67,24 +70,19 @@ powershell -ExecutionPolicy Bypass -File install_windows.ps1
 ```
 
 This will:
-
-create a symlink at
-`%LOCALAPPDATA%\nvim` $\rightarrow$ `nvimSetup\nvim`
-
-install tools via Scoop (if available):
-
-- git
-- ripgrep
-- fd
-- fzf
-- neovim
-- lua-language-server
-- LLVM (clangd + clang-format)
-- stylua
-- python + black
-- JetBrainsMono Nerd Font
-
-prepare Neovim for first launch
+- create a symlink at `%LOCALAPPDATA%\nvim` -> `nvimSetup\nvim`
+- install tools via Scoop (if available):
+  - git
+  - ripgrep
+  - fd
+  - fzf
+  - neovim
+  - lua-language-server
+  - LLVM (clangd + clang-format)
+  - stylua
+  - python + black
+  - JetBrainsMono Nerd Font
+- prepare Neovim for first launch
 
 Then run:
 ```
@@ -117,6 +115,7 @@ nvim
 
 - **Neovim** 0.9+ (0.10+ recommended)
 - **Git**
+- A **Nerd Font** compatible terminal (e.g., JetBrainsMono Nerd Font)
 
 ---
 
@@ -124,49 +123,82 @@ nvim
 
 **Note:** The `<leader>` key is set to `Space`.
 
+### General & Navigation
 | Action | Key |
 | :--- | :--- |
 | Find files | `<leader>ff` |
 | Live grep | `<leader>fg` |
 | Buffers | `<leader>fb` |
 | Help tags | `<leader>fh` |
+| Recent files | `<leader>fo` |
+| Grep string under cursor | `<leader>fw` |
+| Workspace diagnostics | `<leader>fd` |
 | Toggle Neotree | `<leader>e` |
+| Next buffer | `<Tab>` |
+| Previous buffer | `<S-Tab>` |
+| Close buffer | `<leader>c` |
+
+### LSP & Diagnostics
+| Action | Key |
+| :--- | :--- |
 | LSP Hover | `K` |
-| Show Diagnostic | `<leader>d` |
-| Diagnostic List | `<leader>q` |
+| Go to Definition | `gd` |
+| Go to References | `gr` |
+| Go to Implementation | `gi` |
+| Rename symbol | `<leader>rn` |
+| Code Action | `<leader>ca` |
+| Format buffer | `<leader>f` |
+| Show Diagnostic float | `<leader>d` |
 | Prev Diagnostic | `[d` |
 | Next Diagnostic | `]d` |
-| Trigger Autocomplete | `<C-Space>` |
-| Git Status | `<leader>gs` |
+| Switch source/header (.h/.cpp) | `<leader>lh` |
+
+### C++ Tools & Funcy
+| Action | Key | Mode |
+| :--- | :--- | :--- |
+| Generate out-of-class definition | `<leader>cpd` | Visual |
+| Implement pure virtual functions | `<leader>cpc` | Normal |
+| Generate Rule of 3 | `<leader>c3` | Visual |
+| Generate Rule of 5 | `<leader>c5` | Visual |
+| Funcy: Function operations | `<leader>cf` | Normal |
+
+### Git & Diffview
+| Action | Key |
+| :--- | :--- |
+| Git status | `<leader>gs` |
 | Git commit | `<leader>gc` |
 | Git push | `<leader>gp` |
 | Git blame | `<leader>gb` |
-| Diff current file | `<leader>gd` |
-| Open diffview | `<leader>dv` |
-| Closs diffview | `<leader>dc` |
+| Git diff split | `<leader>gf` |
+| Open Diffview | `<leader>dv` |
+| Close Diffview | `<leader>dc` |
 | File history | `<leader>dh` |
-| MarkdownPrevStart | `<leader>mp` |
-| MarkdownPrevStop | `<leader>ms` |
+
+### Markdown
+| Action | Key |
+| :--- | :--- |
+| Markdown Preview Start | `<leader>mp` |
+| Markdown Preview Stop | `<leader>ms` |
 
 ---
 
 ## 🛠️ LSP Support
 
-### C++
-Uses `clangd`.
+### C / C++
+Uses `clangd` for diagnostics, completion, and source/header navigation. Formatted automatically with `clang-format`.
 
 ### Lua
-Uses `lua-language-server` with `stylua formatter`.
+Uses `lua_ls` (Lua Language Server). Formatted automatically with `stylua`.
 
 ### Python
-Uses `black formatter`.
+Uses `pyright` for type checking and IntelliSense. Formatted automatically with `black`.
 
 ---
 
 ## 🧪 First Launch & Setup
 
 1. Run `nvim`.
-2. Wait for `lazy.nvim` to finish downloading and compiling plugins.
+2. Wait for `lazy.nvim` and `mason-tool-installer` to finish downloading plugins and language servers.
 3. Restart Neovim to ensure everything is loaded correctly.
 
 ---
@@ -179,17 +211,7 @@ Ensure the symlink points to your `nvimSetup/nvim` directory:
 - **Windows:** `Get-Item $env:LOCALAPPDATA\nvim`
 
 ### Fonts
-If Nerd Font not applied → change terminal font to JetBrainsMono Nerd Font
+If icons look broken or squares appear -> configure your terminal emulator to use **JetBrainsMono Nerd Font** (or any compatible Nerd Font).
 
 ### LSP Errors
-If `clangd` is not found, refer to the **LSP Support** section above.
-
----
-
-## Requirements
-Nerd Font compatible terminal
-
----
-
-## ❤️ Contributions
-Pull requests and suggestions are always welcome!
+If `clangd`, `lua_ls`, or `pyright` are not found, run `:Mason` inside Neovim to check their installation status, or rerun your system installation script.
