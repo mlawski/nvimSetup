@@ -81,24 +81,52 @@ return {
         event = "VeryLazy",
         config = function()
             local ok, configs = pcall(require, "nvim-treesitter.configs")
-            if not ok then
-                return
+            if ok then
+                configs.setup {
+                    ensure_installed = {
+                        "lua",
+                        "vim",
+                        "vimdoc",
+                        "c",
+                        "cpp",
+                        "python",
+                        "markdown",
+                        "markdown_inline",
+                    },
+                    highlight = { enable = true },
+                    indent = { enable = true },
+                }
             end
 
-            configs.setup {
-                ensure_installed = {
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "c",
-                    "cpp",
-                    "python",
-                    "markdown",
-                    "markdown_inline",
-                },
-                highlight = { enable = true },
-                indent = { enable = true },
-            }
+            -- Register FASTBuild as a custom parser (bypasses the "supported languages" list)
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "TSUpdate",
+                callback = function()
+                    require("nvim-treesitter.parsers").fastbuild = {
+                        install_info = {
+                            url = "https://github.com/pinbraerts/tree-sitter-fastbuild.git",
+                            branch = "main",
+                            files = { "src/parser.c", "src/scanner.c" },
+                            generate_requires_npm = false,
+                            requires_generate_from_grammar = false,
+                        },
+                    }
+                end,
+            })
+
+            local install_ok, ts = pcall(require, "nvim-treesitter")
+            if install_ok then
+                ts.install { "fastbuild" }
+            end
+
+            -- Explicitly start treesitter highlighting for fastbuild files
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "fastbuild",
+                callback = function()
+                    pcall(vim.treesitter.start)
+                    print("ts started")
+                end,
+            })
         end,
     },
 

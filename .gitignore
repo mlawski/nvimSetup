@@ -25,3 +25,6 @@ undo/
 
 # package version - for now latest is expected
 nvim/lazy-lock.json
+
+# after/ directory - contains symlinks to tree-sitter queries (FASTBuild, etc.)
+nvim/after/

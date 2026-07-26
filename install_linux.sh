@@ -64,4 +64,15 @@ unzip -o JetBrainsMono.zip
 rm JetBrainsMono.zip
 fc-cache -fv
 
+# 6. FASTBuild (.bff) tree-sitter queries
+echo "Setting up FASTBuild tree-sitter queries..."
+FASTBUILD_TS_DIR="$HOME/.cache/tree-sitter-fastbuild"
+if [ ! -d "$FASTBUILD_TS_DIR" ]; then
+    git clone --depth 1 https://github.com/pinbraerts/tree-sitter-fastbuild.git "$FASTBUILD_TS_DIR"
+else
+    git -C "$FASTBUILD_TS_DIR" pull --ff-only
+fi
+mkdir -p "$REPO_DIR/after/queries"
+ln -sfn "$FASTBUILD_TS_DIR/queries/fastbuild" "$REPO_DIR/after/queries/fastbuild"
+
 echo "=== Installation complete. Launch Neovim. ==="

@@ -9,7 +9,7 @@ This repository contains:
 - symlink creation (so Neovim always loads this repo as its config)
 - installation of required CLI tools (ripgrep, fd, fzf)
 - plugin management via **lazy.nvim**
-- ready-to-use IDE setup for **C++**, **Lua**, and **Python**
+- ready-to-use IDE setup for **C++**, **Lua**, **Python**, and **FASTBuild** (`.bff`)
 - **Mason** for easy management of LSP servers, DAP, linters, and formatters
 
 ---
@@ -46,6 +46,7 @@ This repository contains:
 - **Automatic LSP and formatter installation** via Mason Tool Installer
 - **neo-tree** file explorer
 - **Treesitter** for advanced syntax highlighting and code structure
+- **FASTBuild** (`.bff`) support via custom tree-sitter parser with query-based syntax highlighting
 - **conform.nvim** for multi-language formatting (`clang-format`, `stylua`, `black`, `prettier`)
 - **gitsigns** for inline Git blame and hunk management
 - **vim-fugitive + diffview** for advanced Git integration
@@ -81,7 +82,8 @@ This will:
   - LLVM (clangd + clang-format)
   - stylua
   - python + black
-  - JetBrainsMono Nerd Font
+   - JetBrainsMono Nerd Font
+- clone & link `tree-sitter-fastbuild` queries into `nvim/after/queries/fastbuild`
 - prepare Neovim for first launch
 
 Then run:
@@ -102,6 +104,7 @@ chmod +x install_linux.sh
 - installs clangd, clang-format
 - installs stylua, black
 - installs Nerd Fonts
+- clones `tree-sitter-fastbuild` and creates symlinks in `nvim/after/queries/fastbuild`
 
 Once the installer finishes, simply run:
 ```
@@ -192,6 +195,9 @@ Uses `lua_ls` (Lua Language Server). Formatted automatically with `stylua`.
 
 ### Python
 Uses `pyright` for type checking and IntelliSense. Formatted automatically with `black`.
+
+### FASTBuild (`.bff`)
+Syntax highlighting powered by a custom tree-sitter parser (`tree-sitter-fastbuild`). Installed automatically during setup via both the Linux and Windows installers.
 
 ---
 
