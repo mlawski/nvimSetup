@@ -27,6 +27,14 @@ local on_attach = function(_, bufnr)
     vim.keymap.set("n", "<leader>f", function()
         vim.lsp.buf.format { async = true }
     end, opts)
+
+    -- Clangd: Switch between source and header (.cpp / .h)
+    vim.keymap.set("n", "<leader>lh", "<cmd>ClangdSwitchSourceHeader<cr>", {
+        noremap = true,
+        silent = true,
+        buffer = bufnr,
+        desc = "LSP: Switch source/header (.h/.cpp)",
+    })
 end
 
 -- 3. Server configurations
@@ -52,4 +60,3 @@ vim.lsp.config("pyright", {
 
 -- 4. Enable servers
 vim.lsp.enable({ "lua_ls", "clangd", "pyright" })
-
