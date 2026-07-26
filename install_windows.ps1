@@ -45,4 +45,20 @@ if (Get-Command scoop -ErrorAction SilentlyContinue) {
     Write-Host 'iwr -useb get.scoop.sh | iex'
 }
 
+# FASTBuild (.bff) tree-sitter queries
+Write-Host "Setting up FASTBuild tree-sitter queries..."
+$fastbuildTsDir = Join-Path $env:USERPROFILE ".cache\tree-sitter-fastbuild"
+if (-not (Test-Path $fastbuildTsDir)) {
+    git clone --depth 1 https://github.com/pinbraerts/tree-sitter-fastbuild.git $fastbuildTsDir
+} else {
+    git -C $fastbuildTsDir pull --ff-only
+}
+
+$queriesDest = Join-Path $repoConfigPath "after\queries\fastbuild"
+New-Item -ItemType Directory -Path (Split-Path $queriesDest -Parent) -Force | Out-Null
+if (Test-Path $queriesDest) {
+    Remove-Item $queriesDest -Force -Recurse
+}
+New-Item -ItemType Junction -Path $queriesDest -Target (Join-Path $fastbuildTsDir "queries\fastbuild") | Out-Null
+
 Write-Host "Installation complete — launch Neovim."

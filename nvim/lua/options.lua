@@ -19,3 +19,10 @@ opt.listchars = {
 }
 
 opt.clipboard = "unnamedplus"
+
+-- FASTBuild filetype detection (otherwise .bff falls back to "conf")
+vim.filetype.add({
+    extension = {
+        bff = "fastbuild",
+    },
+})
