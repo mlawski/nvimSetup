@@ -156,7 +156,7 @@ nvim
 | Next Diagnostic | `]d` |
 | Switch source/header (.h/.cpp) | `<leader>lh` |
 
-### C++ Tools & Funcy
+### C++ Tools
 | Action | Key | Mode |
 | :--- | :--- | :--- |
 | Generate out-of-class definition | `<leader>cpd` | Visual |
