@@ -31,6 +31,8 @@ if (Get-Command scoop -ErrorAction SilentlyContinue) {
     # Nerd Fonts (JetBrainsMono)
     scoop bucket add nerd-fonts
     scoop install JetBrainsMono-NF
+    # tree-sitter CLI (required by nvim-treesitter to compile parser)
+    scoop install tree-sitter
 
     # LSP + formatters
     scoop install lua-language-server

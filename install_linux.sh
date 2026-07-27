@@ -37,7 +37,7 @@ echo "Detected distro: $DISTRO"
 case $DISTRO in
     debian)
         sudo apt update
-        sudo apt install -y git ripgrep fd-find fzf neovim python3 python3-pip clangd clang-format
+        sudo apt install -y git ripgrep fd-find fzf neovim python3 python3-pip clangd clang-format tree-sitter-cli
         pip3 install black
         sudo apt install -y stylua || cargo install stylua
         # Fix fd name
@@ -46,12 +46,12 @@ case $DISTRO in
         fi
         ;;
     fedora)
-        sudo dnf install -y git ripgrep fd-find fzf neovim python3 python3-pip clang-tools-extra
+        sudo dnf install -y git ripgrep fd-find fzf neovim python3 python3-pip clang-tools-extra tree-sitter cli
         pip3 install black
         sudo dnf install -y stylua || cargo install stylua
         ;;
     arch)
-        sudo pacman -S --needed --noconfirm git ripgrep fd fzf neovim python python-pip python-black clang stylua
+        sudo pacman -S --needed --noconfirm git ripgrep fd fzf neovim python python-pip python-black clang stylua tree-sitter-cli
         ;;
 esac
 
