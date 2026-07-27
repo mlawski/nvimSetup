@@ -41,7 +41,7 @@ map("n", "<leader>mp", ":MarkdownPreview<CR>", { desc = "Markdown Preview" })
 map("n", "<leader>ms", ":MarkdownPreviewStop<CR>", { desc = "Markdown Preview Stop" })
 
 -- ============================
---  C++ TOOLS & FUNCY
+--  C++ TOOLS
 -- ============================
 
 -- nvim-treesitter-cpp-tools
