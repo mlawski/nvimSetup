@@ -29,7 +29,20 @@ local on_attach = function(_, bufnr)
     end, opts)
 
     -- Clangd: Switch between source and header (.cpp / .h)
-    vim.keymap.set("n", "<leader>lh", "<cmd>ClangdSwitchSourceHeader<cr>", {
+    vim.keymap.set("n", "<leader>lh", function()
+        local params = { uri = vim.uri_from_bufnr(0) }
+        vim.lsp.buf_request(0, "textDocument/switchSourceHeader", params, function(err, result)
+            if err then
+                vim.notify(err.message, vim.log.levels.ERROR)
+                return
+            end
+            if not result then
+                vim.notify("No corresponding source/header found", vim.log.levels.WARN)
+                return
+            end
+            vim.cmd("edit " .. vim.uri_to_fname(result))
+        end)
+    end, {
         noremap = true,
         silent = true,
         buffer = bufnr,
