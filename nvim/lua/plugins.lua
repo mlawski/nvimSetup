@@ -22,12 +22,25 @@ return {
             catppuccin.setup {
                 flavour = "mocha", -- latte, frappe, macchiato, mocha
                 transparent_background = false,
+                integration = {
+                    bufferline = true,
+                }
             }
 
             local ok_colorscheme = pcall(vim.cmd.colorscheme, "catppuccin")
             if not ok_colorscheme then
                 vim.notify("Failed to load catppuccin colorscheme", vim.log.levels.ERROR)
             end
+        end,
+    },
+
+    -- Bufferline
+    {
+        "akinsho/bufferline.nvim",
+        version = "*",
+        dependencies = { "nvim-tree/nvim-web-devicons"},
+        config = function ()
+            require("bufferline").setup {}
         end,
     },
 
