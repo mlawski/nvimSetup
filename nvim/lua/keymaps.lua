@@ -49,3 +49,36 @@ map("v", "<leader>cpd", ":TSCppDefineClassFunc<CR>", { desc = "C++: Generate out
 map("n", "<leader>cpc", ":TSCppMakeConcreteClass<CR>", { desc = "C++: Implement pure virtual functions", silent = true })
 map("v", "<leader>c3", ":TSCppRuleOf3<CR>", { desc = "C++: Generate Rule of 3", silent = true })
 map("v", "<leader>c5", ":TSCppRuleOf5<CR>", { desc = "C++: Generate Rule of 5", silent = true })
+
+-- ============================
+--  DAP (Debug)
+-- ============================
+
+map("n", "<F5>", function() require("dap").continue() end, { desc = "DAP: Continue" })
+map("n", "<F10>", function() require("dap").step_over() end, { desc = "DAP: Step over" })
+map("n", "<F11>", function() require("dap").step_into() end, { desc = "DAP: Step into" })
+map("n", "<F12>", function() require("dap").step_out() end, { desc = "DAP: Step out" })
+map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "DAP: Toggle breakpoint" })
+map("n", "<leader>dBe", function()
+    require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+end, { desc = "DAP: Conditional breakpoint" })
+map("n", "<leader>dBc", function()
+    require("dap").set_breakpoint(nil, nil, vim.fn.input("Hit condition: "))
+end, { desc = "DAP: Hit condition breakpoint" })
+map("n", "<leader>dp", function() require("dap").pause() end, { desc = "DAP: Pause" })
+map("n", "<leader>dD", function() require("dap").terminate() end, { desc = "DAP: Terminate" })
+map("n", "<leader>dd", function() require("dapui").toggle() end, { desc = "DAP: Toggle UI" })
+
+-- DAP UI auto-open/close on session start/end
+vim.api.nvim_create_autocmd("User", {
+    pattern = "DapSessionStarted",
+    callback = function()
+        require("dapui").open()
+    end,
+})
+vim.api.nvim_create_autocmd("User", {
+    pattern = "DapSessionEnded",
+    callback = function()
+        require("dapui").close()
+    end,
+})

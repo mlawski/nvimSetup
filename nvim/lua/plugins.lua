@@ -252,6 +252,81 @@ return {
         end,
     },
 
+    -- DAP adapters via Mason
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        dependencies = { "williamboman/mason.nvim" },
+        config = function()
+            require("mason-nvim-dap").setup {
+                ensure_installed = { "codelldb", "python" },
+                handlers = {},
+            }
+        end,
+    },
+
+    -- DAP core
+    {
+        "mfussenegger/nvim-dap",
+        dependencies = {
+            "nvim-neotest/nvim-nio",
+            "rcarriga/nvim-dap-ui",
+            "theHamsta/nvim-dap-virtual-text",
+        },
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
+
+            dapui.setup {}
+            require("nvim-dap-virtual-text").setup { commented = true }
+
+            -- Lua
+            dap.adapters.nlua = function(callback, config)
+                callback({ type = "server", host = config.host or "127.0.0.1", port = config.port or "8086" })
+            end
+            dap.configurations.lua = {
+                {
+                    type = "nlua",
+                    request = "attach",
+                    name = "Attach to running Neovim instance",
+                    port = 8086,
+                },
+            }
+
+            -- C/C++
+            dap.adapters.codelldb = {
+                type = "server",
+                port = "${port}",
+                executable = {
+                    command = vim.fn.exepath("codelldb") or "~/.local/share/nvim/mason/bin/codelldb",
+                    args = { "--port", "${port}" },
+                },
+            }
+
+            for _, lang in ipairs({ "c", "cpp" }) do
+                dap.configurations[lang] = {
+                    {
+                        type = "codelldb",
+                        request = "launch",
+                        name = "Debug exe",
+                        program = function()
+                            local path = vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                            return #path > 0 and path or nil
+                        end,
+                        cwd = "${workspaceFolder}",
+                    },
+                    {
+                        type = "codelldb",
+                        request = "attach",
+                        name = "Attach to process",
+                        processId = require("dap.utils").pick_process,
+                        cwd = "${workspaceFolder}",
+                    },
+                }
+            end
+
+        end,
+    },
+
     -- C++ Assist (generate definition from declaration and vice versa)
     {
         "Badhi/nvim-treesitter-cpp-tools",

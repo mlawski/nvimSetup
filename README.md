@@ -10,7 +10,8 @@ This repository contains:
 - installation of required CLI tools (ripgrep, fd, fzf)
 - plugin management via **lazy.nvim**
 - ready-to-use IDE setup for **C++**, **Lua**, **Python**, and **FASTBuild** (`.bff`)
-- **Mason** for easy management of LSP servers, DAP, linters, and formatters
+- **DAP** debugging support for **C/C++** (`codelldb`) and **Python** (`debugpy`) via `nvim-dap` / `nvim-dap-ui`
+- **Mason** for easy management of LSP servers, DAP adapters, linters, and formatters
 
 ---
 
@@ -43,6 +44,7 @@ This repository contains:
 - **Telescope** (with native FZF speedup) for fast file and buffer navigation
 - **nvim-cmp** for autocompletion
 - **Nerd Fonts auto-install**
+- **Debug Adapter Protocol (DAP)** for C/C++ and Python with `nvim-dap` + `nvim-dap-ui`
 - **Automatic LSP and formatter installation** via Mason Tool Installer
 - **neo-tree** file explorer
 - **Treesitter** for advanced syntax highlighting and code structure
@@ -176,6 +178,20 @@ nvim
 | Open Diffview | `<leader>dv` |
 | Close Diffview | `<leader>dc` |
 | File history | `<leader>dh` |
+
+### Debug (DAP)
+| Action | Key |
+| :--- | :--- |
+| Start/Continue | `F5` |
+| Step over | `F10` |
+| Step into | `F11` |
+| Step out | `F12` |
+| Toggle breakpoint | `<leader>db` |
+| Conditional breakpoint | `<leader>dBe` |
+| Hit condition breakpoint | `<leader>dBc` |
+| Pause | `<leader>dp` |
+| Terminate | `<leader>dD` |
+| Toggle DAP UI | `<leader>dd` |
 
 ### Markdown
 | Action | Key |
