@@ -297,9 +297,23 @@ return {
                 type = "server",
                 port = "${port}",
                 executable = {
-                    command = vim.fn.exepath("codelldb") or "~/.local/share/nvim/mason/bin/codelldb",
+                    command = (function()
+                        local p = vim.fn.exepath("codelldb")
+                        if p ~= "" then
+                            return p
+                        end
+                        return vim.fn.expand("~/.local/share/nvim/mason/bin/codelldb")
+                    end)(),
                     args = { "--port", "${port}" },
                 },
+            }
+
+            -- GDB
+            dap.adapters.gdb = {
+                id = "gdb",
+                type = "executable",
+                command = "gdb",
+                args = { "--quiet", "--interpreter=dap" },
             }
 
             for _, lang in ipairs({ "c", "cpp" }) do
