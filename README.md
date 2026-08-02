@@ -165,7 +165,6 @@ nvim
 | Implement pure virtual functions | `<leader>cpc` | Normal |
 | Generate Rule of 3 | `<leader>c3` | Visual |
 | Generate Rule of 5 | `<leader>c5` | Visual |
-| Funcy: Function operations | `<leader>cf` | Normal |
 
 ### Git & Diffview
 | Action | Key |

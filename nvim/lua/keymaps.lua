@@ -45,7 +45,7 @@ map("n", "<leader>ms", ":MarkdownPreviewStop<CR>", { desc = "Markdown Preview St
 -- ============================
 
 -- nvim-treesitter-cpp-tools
-map("v", "<leader>cpd", ":TSCppDefineClassFunc<CR>", { desc = "C++: Generate out-of-class definition", silent = true })
+map("v", "<leader>cpd", ":TSCppImplWrite<CR>", { desc = "C++: Generate out-of-class definition", silent = true })
 map("n", "<leader>cpc", ":TSCppMakeConcreteClass<CR>", { desc = "C++: Implement pure virtual functions", silent = true })
 map("v", "<leader>c3", ":TSCppRuleOf3<CR>", { desc = "C++: Generate Rule of 3", silent = true })
 map("v", "<leader>c5", ":TSCppRuleOf5<CR>", { desc = "C++: Generate Rule of 5", silent = true })
