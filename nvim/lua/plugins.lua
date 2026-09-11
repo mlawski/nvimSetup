@@ -244,12 +244,10 @@ return {
 
     -- MarkdownPreview
     {
-        "iamcco/markdown-preview.nvim",
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
         ft = "markdown",
-        build = "cd app && npm install",
-        config = function()
-            vim.g.mkdp_auto_start = 0
-        end,
+        opts = {},
     },
 
     -- DAP adapters via Mason
