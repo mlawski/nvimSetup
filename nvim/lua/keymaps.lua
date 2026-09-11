@@ -31,9 +31,9 @@ map("n", "<leader>dv", ":DiffviewOpen<CR>", { desc = "Open Diffview" }, opts)
 map("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Close Diffview" }, opts)
 map("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "File history" }, opts)
 
--- MarkdownPreview
-map("n", "<leader>mp", ":MarkdownPreview<CR>", { desc = "Markdown Preview" })
-map("n", "<leader>ms", ":MarkdownPreviewStop<CR>", { desc = "Markdown Preview Stop" })
+-- render-markdown
+map("n", "<leader>mp", function() require("render-markdown").toggle() end, { desc = "render-markdown: Toggle rendering" })
+map("n", "<leader>md", function() require("render-markdown").preview() end, { desc = "render-markdown: Preview" })
 
 -- ============================
 --  C++ TOOLS

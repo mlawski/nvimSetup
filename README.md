@@ -52,7 +52,7 @@ This repository contains:
 - **vim-fugitive + diffview** for advanced Git integration
 - **lualine** statusline
 - **catppuccin** theme (Mocha flavor)
-- **Markdown support** with live preview (`markdown-preview.nvim`)
+- **Markdown rendering** inside Neovim via `render-markdown.nvim` (icons, borders, tables, callouts)
 - Works seamlessly on:
   - Windows 11
   - Linux (Ubuntu, Fedora, Arch, etc.)
@@ -180,8 +180,8 @@ nvim
 ### Markdown
 | Action | Key |
 | :--- | :--- |
-| Markdown Preview Start | `<leader>mp` |
-| Markdown Preview Stop | `<leader>ms` |
+| Toggle rendering (raw/rendered) | `<leader>mp` |
+| Preview (rendered buffer to the side) | `<leader>md` |
 
 ---
 
