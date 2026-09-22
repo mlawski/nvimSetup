@@ -71,5 +71,20 @@ vim.lsp.config("pyright", {
     on_attach = on_attach,
 })
 
+vim.lsp.config("rust-analyzer", {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            cargo = {
+                allFeatures = true,
+            },
+            checkOnSave = {
+                command = "clippy",
+            },
+        },
+    },
+})
+
 -- 4. Enable servers
-vim.lsp.enable({ "lua_ls", "clangd", "pyright" })
+vim.lsp.enable({ "lua_ls", "clangd", "pyright", "rust-analyzer" })

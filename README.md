@@ -9,8 +9,8 @@ This repository contains:
 - symlink creation (so Neovim always loads this repo as its config)
 - installation of required CLI tools (ripgrep, fd, fzf)
 - plugin management via **lazy.nvim**
-- ready-to-use IDE setup for **C++**, **Lua**, **Python**, and **FASTBuild** (`.bff`)
-- **DAP** debugging support for **C/C++** (`codelldb`) and **Python** (`debugpy`) via `nvim-dap` / `nvim-dap-ui`
+- ready-to-use IDE setup for **C++**, **Lua**, **Python**, **Rust**, and **FASTBuild** (`.bff`)
+- **DAP** debugging support for **C/C++**, **Rust** (`codelldb`) and **Python** (`debugpy`) via `nvim-dap` / `nvim-dap-ui`
 - **Mason** for easy management of LSP servers, DAP adapters, linters, and formatters
 
 ---
@@ -38,18 +38,19 @@ This repository contains:
   - C / C++ (`clangd`)
   - Lua (`lua_ls`)
   - Python (`pyright`)
+  - Rust (`rust-analyzer`)
 - **C++ Development Tools**:
   - Out-of-class definition and Rule of 3/5 generation via **nvim-treesitter-cpp-tools**
   - Native header/source file switching via `clangd`
 - **Telescope** (with native FZF speedup) for fast file and buffer navigation
 - **nvim-cmp** for autocompletion
 - **Nerd Fonts auto-install**
-- **Debug Adapter Protocol (DAP)** for C/C++ and Python with `nvim-dap` + `nvim-dap-ui`
+- **Debug Adapter Protocol (DAP)** for C/C++, Rust, and Python with `nvim-dap` + `nvim-dap-ui`
 - **Automatic LSP and formatter installation** via Mason Tool Installer
 - **neo-tree** file explorer
 - **Treesitter** for advanced syntax highlighting and code structure
 - **FASTBuild** (`.bff`) support via custom tree-sitter parser with query-based syntax highlighting
-- **conform.nvim** for multi-language formatting (`clang-format`, `stylua`, `black`, `prettier`)
+- **conform.nvim** for multi-language formatting (`clang-format`, `stylua`, `black`, `rustfmt`, `prettier`)
 - **gitsigns** for inline Git blame and hunk management
 - **vim-fugitive + diffview** for advanced Git integration
 - **lualine** statusline
@@ -121,6 +122,7 @@ nvim
 - **Neovim** 0.9+ (0.10+ recommended)
 - **Git**
 - A **Nerd Font** compatible terminal (e.g., JetBrainsMono Nerd Font)
+- **Rust toolchain** (`rustup` / `cargo`) — only for Rust development (builds and clippy checks)
 
 ---
 
@@ -211,6 +213,9 @@ Uses `lua_ls` (Lua Language Server). Formatted automatically with `stylua`.
 ### Python
 Uses `pyright` for type checking and IntelliSense. Formatted automatically with `black`.
 
+### Rust
+Uses `rust-analyzer` for diagnostics, completion, and refactoring (with clippy checks on save). Formatted automatically with `rustfmt`.
+
 ### FASTBuild (`.bff`)
 Syntax highlighting powered by a custom tree-sitter parser (`tree-sitter-fastbuild`). Installed automatically during setup via both the Linux and Windows installers.
 
@@ -235,4 +240,4 @@ Ensure the symlink points to your `nvimSetup/nvim` directory:
 If icons look broken or squares appear -> configure your terminal emulator to use **JetBrainsMono Nerd Font** (or any compatible Nerd Font).
 
 ### LSP Errors
-If `clangd`, `lua_ls`, or `pyright` are not found, run `:Mason` inside Neovim to check their installation status, or rerun your system installation script.
+If `clangd`, `lua_ls`, `rust-analyzer`, or `pyright` are not found, run `:Mason` inside Neovim to check their installation status, or rerun your system installation script.

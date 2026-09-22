@@ -114,6 +114,7 @@ return {
                         "c",
                         "cpp",
                         "python",
+                        "rust",
                         "markdown",
                         "markdown_inline",
                     },
@@ -170,7 +171,7 @@ return {
         dependencies = { "williamboman/mason.nvim" },
         config = function()
             require("mason-lspconfig").setup {
-                ensure_installed = { "lua_ls", "clangd", "pyright" },
+                ensure_installed = { "lua_ls", "clangd", "pyright", "rust-analyzer" },
                 automatic_enable = false,
             }
         end,
@@ -183,6 +184,7 @@ return {
                     "stylua",
                     "clang-format",
                     "black",
+                    "rustfmt",
                     "prettier",
                 },
                 auto_update = false,
@@ -222,6 +224,7 @@ return {
                     cpp = { "clang-format" },
                     c = { "clang-format" },
                     python = { "black" },
+                    rust = { "rustfmt" },
                     markdown = { "prettier" },
                     json = { "prettier" },
                     yaml = { "prettier" },
@@ -314,7 +317,7 @@ return {
                 args = { "--quiet", "--interpreter=dap" },
             }
 
-            for _, lang in ipairs({ "c", "cpp" }) do
+            for _, lang in ipairs({ "c", "cpp", "rust" }) do
                 dap.configurations[lang] = {
                     {
                         type = "codelldb",
