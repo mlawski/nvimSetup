@@ -171,7 +171,7 @@ return {
         dependencies = { "williamboman/mason.nvim" },
         config = function()
             require("mason-lspconfig").setup {
-                ensure_installed = { "lua_ls", "clangd", "pyright", "rust-analyzer" },
+                ensure_installed = { "lua_ls", "clangd", "pyright", "rust_analyzer" },
                 automatic_enable = false,
             }
         end,
@@ -184,7 +184,6 @@ return {
                     "stylua",
                     "clang-format",
                     "black",
-                    "rustfmt",
                     "prettier",
                 },
                 auto_update = false,
